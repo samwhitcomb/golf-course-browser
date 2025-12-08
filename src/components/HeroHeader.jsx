@@ -2,7 +2,9 @@ import React from 'react'
 import './HeroHeader.css'
 
 function HeroHeader({ featuredCourse, onTeeOffClick }) {
-  const videoPath = '/videos/hero-video.mp4'
+  // Hero video removed due to GitHub file size limits
+  // You can host this on a CDN or external service and update this path
+  const videoPath = null
   
   const handleTeeOff = () => {
     if (featuredCourse && onTeeOffClick) {
