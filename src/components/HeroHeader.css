@@ -1,0 +1,149 @@
+.hero-header {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  max-height: 800px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 40px;
+  margin-top: 100px;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-course-name {
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
+}
+
+.hero-description {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.5;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-btn-primary {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.hero-btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.hero-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.hero-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .hero-header {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .hero-course-name {
+    font-size: 36px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .hero-content {
+    padding: 0 20px;
+    margin-top: 60px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-btn {
+    width: 100%;
+  }
+}
+
+

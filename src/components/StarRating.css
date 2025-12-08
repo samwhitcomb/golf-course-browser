@@ -1,0 +1,51 @@
+.star-rating {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.star-rating.read-only {
+  pointer-events: none;
+}
+
+.star {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  line-height: 1;
+  display: inline-block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+.star:not(.read-only):hover {
+  transform: scale(1.1);
+}
+
+.star.filled {
+  color: #fbbf24;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(251, 191, 36, 0.5), 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+.star.empty {
+  color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+.star:disabled {
+  cursor: default;
+}
+
+.star:focus {
+  outline: none;
+}
+
+.star:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+

@@ -1,0 +1,212 @@
+.scorecard-preview {
+  padding: 20px 0;
+  color: #ffffff;
+}
+
+.scorecard-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.scorecard-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #ffffff;
+}
+
+.scorecard-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 16px;
+}
+
+.tee-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.tee-selector-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.tee-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tee-button {
+  padding: 6px 14px;
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 60px;
+}
+
+.tee-button:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.tee-button.active {
+  opacity: 1;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.scorecard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scorecard-row {
+  display: grid;
+  grid-template-columns: 50px 50px 80px 50px 8px 50px 50px 80px 50px;
+  gap: 1px;
+  margin-bottom: 1px;
+}
+
+.scorecard-header-row {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scorecard-cell {
+  padding: 12px 8px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 14px;
+}
+
+.scorecard-cell.header {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.scorecard-cell.hole-number {
+  font-weight: 600;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.scorecard-cell.par {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.scorecard-cell.par-3 {
+  color: #60a5fa;
+}
+
+.scorecard-cell.par-4 {
+  color: #34d399;
+}
+
+.scorecard-cell.par-5 {
+  color: #fbbf24;
+}
+
+.scorecard-cell.yardage {
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.yardage-number {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.yardage-number.highlighted {
+  animation: yardageFlash 0.8s ease-out;
+}
+
+@keyframes yardageFlash {
+  0% {
+    color: var(--highlight-color, rgba(251, 191, 36, 1));
+    font-weight: 700;
+    text-shadow: 0 0 8px var(--highlight-color, rgba(251, 191, 36, 0.8));
+  }
+  30% {
+    color: var(--highlight-color, rgba(251, 191, 36, 0.9));
+    text-shadow: 0 0 4px var(--highlight-color, rgba(251, 191, 36, 0.5));
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: normal;
+    text-shadow: none;
+  }
+}
+
+.scorecard-cell.handicap {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.scorecard-totals-row {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.scorecard-totals-row.final-total {
+  background: rgba(229, 9, 20, 0.2);
+  border-top: 2px solid #e50914;
+}
+
+.scorecard-cell.total-label {
+  text-align: left;
+  padding-left: 12px;
+  font-weight: 600;
+}
+
+.scorecard-cell.total-value {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.scorecard-divider {
+  background: rgba(255, 255, 255, 0.15);
+  width: 2px;
+  margin: 0 4px;
+  border-radius: 1px;
+}
+
+@media (max-width: 768px) {
+  .scorecard-row {
+    grid-template-columns: 40px 40px 70px 40px 6px 40px 40px 70px 40px;
+    gap: 1px;
+  }
+
+  .scorecard-cell {
+    padding: 10px 4px;
+    font-size: 12px;
+  }
+
+  .scorecard-cell.hole-number,
+  .scorecard-cell.par {
+    font-size: 14px;
+  }
+
+  .scorecard-title {
+    font-size: 20px;
+  }
+}
+

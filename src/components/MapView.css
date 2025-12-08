@@ -1,0 +1,221 @@
+.map-view-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.map-view-container {
+  width: 95vw;
+  height: 90vh;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.map-view-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.map-view-close:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.map-view-header {
+  padding: 20px 40px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  z-index: 1000;
+}
+
+.map-view-header h2 {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.map-view-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.map-view-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+
+/* Custom Marker Styles */
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.marker-pin:hover {
+  transform: rotate(-45deg) scale(1.2);
+  z-index: 1000;
+}
+
+.marker-rating {
+  transform: rotate(45deg);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Popup Styles */
+.map-popup-content {
+  text-align: center;
+  min-width: 200px;
+}
+
+.map-popup-content h3 {
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.map-popup-content p {
+  margin: 4px 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.map-popup-rating {
+  color: #f59e0b !important;
+  font-weight: 600;
+  font-size: 14px !important;
+}
+
+.map-popup-button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #e50914;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.map-popup-button:hover {
+  background-color: #f40612;
+  transform: scale(1.05);
+}
+
+/* Leaflet Popup Override */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+}
+
+/* Leaflet Tooltip Override */
+.leaflet-tooltip {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  max-width: 250px;
+  text-align: center;
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+.leaflet-tooltip-bottom:before {
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+}
+
+.leaflet-tooltip-left:before {
+  border-left-color: rgba(0, 0, 0, 0.9);
+}
+
+.leaflet-tooltip-right:before {
+  border-right-color: rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 768px) {
+  .map-view-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .map-view-header {
+    padding: 15px 20px;
+  }
+
+  .map-view-header h2 {
+    font-size: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

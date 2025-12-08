@@ -1,0 +1,364 @@
+/* Dark mode base styles - Netflix-inspired */
+.browse-app {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.rating-tier-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 40px;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.rating-tier-divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.rating-tier-divider-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.browse-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.3s;
+  gap: 20px;
+}
+
+.browse-header.scrolled {
+  background: rgba(0,0,0,0.9);
+}
+
+.browse-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  justify-self: start;
+}
+
+.header-search {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-self: end;
+}
+
+.edit-link {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.edit-link:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.filters-container {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 20px 40px;
+  border-bottom: 1px solid #333;
+}
+
+.filters-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+
+.globe-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.filter-toggle {
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.browse-content {
+  padding-top: 0px;
+  padding-bottom: 40px;
+}
+
+/* Accessibility improvements */
+.browse-app *:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+.browse-app {
+  scroll-behavior: smooth;
+}
+
+/* Loading states */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #ffffff;
+  font-size: 24px;
+  background-color: #0a0a0a;
+}
+
+/* Keyboard navigation support */
+.course-card-browse:focus,
+.hero-btn:focus,
+.filter-button:focus,
+.carousel-arrow:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .filters-container {
+    padding: 15px 20px;
+  }
+
+  .filters-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .browse-content {
+    padding-top: 60px;
+  }
+
+  .browse-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px 20px;
+  }
+
+  .browse-header h1 {
+    font-size: 18px;
+    justify-self: center;
+  }
+
+  .header-search {
+    order: 2;
+  }
+
+  .header-actions {
+    order: 3;
+    justify-self: center;
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+/* Search Results Overlay */
+.search-results-overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 101;
+  overflow-y: auto;
+  padding: 20px 40px 40px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.search-results-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.search-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-results-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.clear-search-btn {
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-search-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.search-result-card {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.no-results p {
+  font-size: 20px;
+  margin: 0 0 24px 0;
+}
+
+/* Dim main content when searching */
+.main-content {
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.main-content.dimmed {
+  opacity: 0.3;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+  .search-results-overlay {
+    padding: 15px 20px 20px;
+  }
+
+  .search-results-header h2 {
+    font-size: 20px;
+  }
+
+  .search-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-section {
+    padding: 0 10px;
+  }
+
+  .course-card-browse {
+    min-width: 160px;
+    width: 160px;
+  }
+
+  .search-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-results-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
