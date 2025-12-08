@@ -16,6 +16,12 @@ images/
 *.png
 *.gif
 
+# Large video files (exceed GitHub 100MB limit)
+*.mp4
+Videos/
+"CHISHOLM PARK GOLF CLUB - FLYOVER TOUR www.helicamfilms.com - Tony Young (1080p, h264).mp4"
+public/videos/hero-video.mp4
+
 # Node
 node_modules/
 dist/
