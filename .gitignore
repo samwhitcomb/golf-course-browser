@@ -11,9 +11,18 @@ ENV/
 
 # Images (old location - now in public/)
 images/
-# Keep public/images and public/videos for GitHub Pages
+
+# Keep public/images and public/videos for GitHub Pages (must come before wildcards)
 !public/images/
 !public/videos/
+!public/images/**/*.jpg
+!public/images/**/*.jpeg
+!public/images/**/*.png
+!public/images/**/*.gif
+!public/images/**/*.webp
+!public/videos/**/*.mp4
+
+# Ignore image files elsewhere
 *.jpg
 *.jpeg
 *.png
