@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Images (old location - now in public/)
+images/
+# Keep public/images and public/videos for GitHub Pages
+!public/images/
+!public/videos/
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Keep public/courses.json for GitHub Pages
+!public/courses.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

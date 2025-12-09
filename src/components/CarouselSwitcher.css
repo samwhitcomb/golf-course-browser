@@ -1,0 +1,41 @@
+.carousel-switcher {
+  display: flex;
+  gap: 0;
+  margin: 40px 0 30px;
+  padding: 0 40px;
+  border-bottom: 2px solid #333;
+}
+
+.switcher-tab {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 15px 30px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.switcher-tab:hover {
+  color: #fff;
+}
+
+.switcher-tab.active {
+  color: #fff;
+}
+
+.switcher-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #e50914;
+}
+
+
