@@ -61,17 +61,25 @@ function BrowseApp() {
       
       // Process image URLs to include base path
       const processedData = data.map(course => {
-        if (course.imageUrl && course.imageUrl.startsWith('/')) {
-          course.imageUrl = getAssetPath(course.imageUrl.slice(1))
+        // Process imageUrl
+        if (course.imageUrl) {
+          // Remove leading slash if present, then add base path
+          const cleanPath = course.imageUrl.startsWith('/') ? course.imageUrl.slice(1) : course.imageUrl
+          course.imageUrl = getAssetPath(cleanPath)
         }
+        
+        // Process images object
         if (course.images) {
-          if (course.images.hero && course.images.hero.startsWith('/')) {
-            course.images.hero = getAssetPath(course.images.hero.slice(1))
+          if (course.images.hero) {
+            const cleanPath = course.images.hero.startsWith('/') ? course.images.hero.slice(1) : course.images.hero
+            course.images.hero = getAssetPath(cleanPath)
           }
-          if (course.images.additional) {
-            course.images.additional = course.images.additional.map(img => 
-              img.startsWith('/') ? getAssetPath(img.slice(1)) : getAssetPath(img)
-            )
+          if (course.images.additional && Array.isArray(course.images.additional)) {
+            course.images.additional = course.images.additional.map(img => {
+              if (!img) return img
+              const cleanPath = img.startsWith('/') ? img.slice(1) : img
+              return getAssetPath(cleanPath)
+            })
           }
         }
         return course

@@ -117,6 +117,10 @@ function CourseCard({ course, onClick }) {
             src={course.imageUrl}
             alt={course.name}
             className="course-card-image"
+            onError={(e) => {
+              console.error(`Failed to load image for ${course.name}:`, course.imageUrl)
+              e.target.style.display = 'none'
+            }}
           />
         ) : (
           <div className="course-card-placeholder">
