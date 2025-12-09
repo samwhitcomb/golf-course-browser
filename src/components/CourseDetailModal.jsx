@@ -8,6 +8,7 @@ import UpgradeModal from './UpgradeModal'
 import StarRating from './StarRating'
 import { generateMockStats } from '../utils/mockStats'
 import { hasStudioAccess } from '../utils/subscription'
+import { getAssetPath } from '../utils/baseUrl'
 import './CourseDetailModal.css'
 
 function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRatingChange, isPlayLater, onPlayLaterToggle, onTeeOffClick }) {
@@ -103,11 +104,17 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
     
     // Check if course has a mapped video
     if (videoMap[course.id]) {
-      return `/videos/${videoMap[course.id]}`
+      return getAssetPath(`videos/${videoMap[course.id]}`)
     }
     
     // Fallback to course videoUrl or default pattern
-    return course.videoUrl || `/videos/${course.id}.mp4`
+    if (course.videoUrl) {
+      // If videoUrl is already an absolute path, convert it
+      return course.videoUrl.startsWith('/') 
+        ? getAssetPath(course.videoUrl.slice(1))
+        : getAssetPath(course.videoUrl)
+    }
+    return getAssetPath(`videos/${course.id}.mp4`)
   }
   
   const handleVideoClick = (e) => {

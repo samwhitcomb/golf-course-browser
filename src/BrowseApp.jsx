@@ -9,6 +9,7 @@ import FilterPanel from './components/FilterPanel'
 import MapView from './components/MapView'
 import { getBlurb } from './utils/blurbUtils'
 import { setLastPlayed, getLastPlayed, getPlayLater, togglePlayLater, isPlayLater, getRatings, setRating, getRating, migrateFavoritesToRatings } from './utils/userPreferences'
+import { getAssetPath } from './utils/baseUrl'
 import './BrowseApp.css'
 
 function BrowseApp() {
@@ -54,10 +55,29 @@ function BrowseApp() {
   const fetchCourses = async () => {
     try {
       setLoading(true)
-      const response = await fetch('/courses.json')
+      const response = await fetch(getAssetPath('courses.json'))
       if (!response.ok) throw new Error('Failed to fetch courses')
       const data = await response.json()
-      setCourses(data)
+      
+      // Process image URLs to include base path
+      const processedData = data.map(course => {
+        if (course.imageUrl && course.imageUrl.startsWith('/')) {
+          course.imageUrl = getAssetPath(course.imageUrl.slice(1))
+        }
+        if (course.images) {
+          if (course.images.hero && course.images.hero.startsWith('/')) {
+            course.images.hero = getAssetPath(course.images.hero.slice(1))
+          }
+          if (course.images.additional) {
+            course.images.additional = course.images.additional.map(img => 
+              img.startsWith('/') ? getAssetPath(img.slice(1)) : getAssetPath(img)
+            )
+          }
+        }
+        return course
+      })
+      
+      setCourses(processedData)
     } catch (err) {
       console.error('Error fetching courses:', err)
     } finally {

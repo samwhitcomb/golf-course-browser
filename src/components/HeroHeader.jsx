@@ -1,8 +1,9 @@
 import React from 'react'
+import { getAssetPath } from '../utils/baseUrl'
 import './HeroHeader.css'
 
 function HeroHeader({ featuredCourse, onTeeOffClick }) {
-  const videoPath = '/videos/CHISHOLM PARK GOLF CLUB - FLYOVER TOUR www.helicamfilms.com - Tony Young (1080p, h264).mp4'
+  const videoPath = getAssetPath('videos/CHISHOLM PARK GOLF CLUB - FLYOVER TOUR www.helicamfilms.com - Tony Young (1080p, h264).mp4')
   
   const handleTeeOff = () => {
     if (featuredCourse && onTeeOffClick) {
