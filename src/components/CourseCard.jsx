@@ -112,9 +112,9 @@ function CourseCard({ course, onClick }) {
             <StudioBadge variant="card" size="small" />
           </div>
         )}
-        {course.hasImage ? (
+        {(course.hasImage || course.imageUrl || course.isIgolf) ? (
           <img
-            src={course.imageUrl}
+            src={course.imageUrl || (course.images?.hero)}
             alt={course.name}
             className="course-card-image"
             onError={(e) => {

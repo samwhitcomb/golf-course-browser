@@ -116,7 +116,7 @@ function StatsBar({ course, stats }) {
           </div>
         </div>
 
-        {/* Mapping Type (for Studio courses) */}
+        {/* Mapping Type (for Studio, Standard, and iGolf courses) */}
         {stats.mappingType && (
           <div className="stat-column">
             <div className="stat-label">Mapping Type</div>
@@ -126,7 +126,11 @@ function StatsBar({ course, stats }) {
               </span>
             </div>
             <div className="stat-secondary">
-              {stats.version === 'studio' ? 'Sub-Centimeter Accuracy' : '1m Accuracy'}
+              {stats.mappingType === 'Radar' 
+                ? '+/-5m Accuracy'
+                : stats.version === 'studio' 
+                ? 'Sub-Centimeter Accuracy' 
+                : '1m Accuracy'}
             </div>
           </div>
         )}

@@ -125,6 +125,61 @@
   transform: scale(1.1);
 }
 
+.studios-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.studios-toggle-label {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.studios-toggle {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 31px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.studios-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.studios-toggle.active {
+  background-color: #34c759;
+}
+
+.studios-toggle.active:hover {
+  background-color: #30d158;
+}
+
+.studios-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.studios-toggle.active .studios-toggle-slider {
+  transform: translateX(20px);
+}
+
 .filter-toggle {
   padding: 8px 16px;
   background-color: rgba(255, 255, 255, 0.1);

@@ -67,17 +67,47 @@ def main():
             filename, ext = image_paths['hero']
             images['hero'] = f"/images/{filename}"
         
-        # Additional images
+        # Additional images from file system (slot 1 and 2)
         for slot in ['1', '2']:
             if image_paths[slot]:
                 filename, ext = image_paths[slot]
                 images['additional'].append(f"/images/{filename}")
         
+        # Preserve any existing additional images that aren't from file system slots
+        # (e.g., gameplay images that were manually added)
+        if 'images' in course and 'additional' in course['images']:
+            existing_additional = course['images']['additional']
+            if isinstance(existing_additional, list):
+                for existing_img in existing_additional:
+                    # Only add if it's not already in the list and not a slot image
+                    if existing_img not in images['additional']:
+                        # Check if it's not a slot image (doesn't match pattern _1 or _2)
+                        if not any(f"_{slot}" in existing_img for slot in ['1', '2']):
+                            images['additional'].append(existing_img)
+        
         course['images'] = images
         
+        # Preserve blurb for igolf courses (they have single-paragraph descriptions)
+        if course.get('isIgolf', False) and 'blurb' not in course:
+            # If igolf course has description but no blurb, create blurb array
+            if course.get('description'):
+                course['blurb'] = [course['description']]
+        
         # Backward compatibility: set hasImage and imageUrl from hero
-        course['hasImage'] = images['hero'] is not None
-        course['imageUrl'] = images['hero']
+        # Preserve hasImage: false for igolf courses (to exclude from carousels)
+        # But preserve imageUrl if it exists (for display in search results and modal)
+        if course.get('isIgolf', False):
+            course['hasImage'] = False  # Keep false to exclude from carousels
+            # For igolf courses, use gameplay image if imageUrl is set
+            if course.get('imageUrl') and 'Courses Gameplay' in course.get('imageUrl', ''):
+                images['hero'] = course['imageUrl']  # Set images.hero to gameplay image
+                course['images'] = images  # Update images object
+            # Preserve existing imageUrl if set (e.g., gameplay image)
+            if 'imageUrl' not in course or not course.get('imageUrl'):
+                course['imageUrl'] = images['hero'] if images['hero'] else None
+        else:
+            course['hasImage'] = images['hero'] is not None
+            course['imageUrl'] = images['hero']
         
         # Add descriptions if available
         if course_id in descriptions:

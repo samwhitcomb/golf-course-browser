@@ -21,6 +21,7 @@ function BrowseApp() {
   const [filters, setFilters] = useState({ continent: null, mood: null, type: null, contentTier: null })
   const [showFilters, setShowFilters] = useState(false)
   const [showMapView, setShowMapView] = useState(false)
+  const [showStudiosOnly, setShowStudiosOnly] = useState(false)
   const [activeTab, setActiveTab] = useState('smart')
   const [ratings, setRatings] = useState(new Map())
   const [playLater, setPlayLater] = useState(new Set())
@@ -50,7 +51,7 @@ function BrowseApp() {
 
   useEffect(() => {
     applyFilters()
-  }, [courses, searchQuery, filters])
+  }, [courses, searchQuery, filters, showStudiosOnly])
 
   const fetchCourses = async () => {
     try {
@@ -96,19 +97,29 @@ function BrowseApp() {
   const applyFilters = () => {
     let filtered = [...courses]
 
-    // Search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase()
-      // If searching for "studio" or "studios", include all Studio courses
-      if (query === 'studio' || query === 'studios') {
+    // Search filter - only apply if there's a search query
+    if (searchQuery && searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim()
+      // If searching for "studios", include all Studios courses
+      if (query === 'studios') {
         filtered = filtered.filter(course => course.isStudio === true)
       } else {
-        filtered = filtered.filter(course =>
-          course.name.toLowerCase().includes(query) ||
-          course.location.toLowerCase().includes(query) ||
-          course.description?.toLowerCase().includes(query) ||
-          (query.includes('studio') && course.isStudio === true)
-        )
+        filtered = filtered.filter(course => {
+          // Check name
+          const nameMatch = course.name?.toLowerCase().includes(query) || false
+          // Check location
+          const locationMatch = course.location?.toLowerCase().includes(query) || false
+          // Check description (for regular courses)
+          const descriptionMatch = course.description?.toLowerCase().includes(query) || false
+          // Check blurb (for igolf courses and regular courses with blurbs)
+          const blurbMatch = course.blurb && Array.isArray(course.blurb) 
+            ? course.blurb.some(paragraph => paragraph?.toLowerCase().includes(query))
+            : false
+          // Check studios
+          const studiosMatch = query.includes('studios') && course.isStudio === true
+          
+          return nameMatch || locationMatch || descriptionMatch || blurbMatch || studiosMatch
+        })
       }
     }
 
@@ -134,13 +145,18 @@ function BrowseApp() {
       filtered = filtered.filter(c => c.continent === filters.continent)
     }
 
-    // Content Tier filter
+    // Content Tier filter (from FilterPanel - keep for backward compatibility)
     if (filters.contentTier === 'studio') {
       filtered = filtered.filter(c => c.isStudio === true)
     } else if (filters.contentTier === 'free') {
       filtered = filtered.filter(c => !c.isStudio || c.isStudio === false)
     }
     // 'all' or null shows everything
+
+    // Studios toggle filter (from header button)
+    if (showStudiosOnly) {
+      filtered = filtered.filter(c => c.isStudio === true)
+    }
 
     setFilteredCourses(filtered)
   }
@@ -195,7 +211,7 @@ function BrowseApp() {
   // Get smart list carousels
   const getSmartListCarousels = () => {
     // Use filtered courses if filters are active (but not when searching, since search has its own overlay)
-    const hasActiveFilters = filters.continent || filters.mood || filters.type || filters.contentTier
+    const hasActiveFilters = filters.continent || filters.mood || filters.type || filters.contentTier || showStudiosOnly
     const coursesToUse = (hasActiveFilters && !searchQuery) ? filteredCourses : courses
     const allCourses = coursesToUse.filter(c => c.hasImage)
     const lastPlayedId = getLastPlayed()
@@ -360,7 +376,7 @@ function BrowseApp() {
   // Get curated carousels
   const getCuratedCarousels = () => {
     // Use filtered courses if filters are active (but not when searching, since search has its own overlay)
-    const hasActiveFilters = filters.continent || filters.mood || filters.type || filters.contentTier
+    const hasActiveFilters = filters.continent || filters.mood || filters.type || filters.contentTier || showStudiosOnly
     const coursesToUse = (hasActiveFilters && !searchQuery) ? filteredCourses : courses
     const allCourses = coursesToUse.filter(c => c.hasImage)
     
@@ -429,6 +445,18 @@ function BrowseApp() {
           >
             🌍
           </button>
+          <div className="studios-toggle-container">
+            <span className="studios-toggle-label">Studios</span>
+            <button
+              className={`studios-toggle ${showStudiosOnly ? 'active' : ''}`}
+              onClick={() => setShowStudiosOnly(!showStudiosOnly)}
+              aria-label={showStudiosOnly ? 'Show all courses' : 'Show Studios courses only'}
+              role="switch"
+              aria-checked={showStudiosOnly}
+            >
+              <span className="studios-toggle-slider"></span>
+            </button>
+          </div>
           <button
             className="filter-toggle"
             onClick={() => setShowFilters(!showFilters)}
@@ -446,7 +474,7 @@ function BrowseApp() {
         </div>
       )}
 
-      {searchQuery && (
+      {searchQuery && searchQuery.trim() && (
         <div className="search-results-overlay">
           <div className="search-results-container">
             <div className="search-results-header">
@@ -632,7 +660,7 @@ function BrowseApp() {
 
                 {curatedCarousels.studioOriginals.length > 0 && (
                   <CourseCarousel
-                    title="Studio Originals"
+                    title="Studios Originals"
                     description="Experience Lidar Detail - Premium courses with sub-centimeter accuracy"
                     courses={curatedCarousels.studioOriginals}
                     onCourseClick={handleCourseClick}
@@ -646,7 +674,7 @@ function BrowseApp() {
 
       {showMapView && (
         <MapView
-          courses={(filters.continent || filters.mood || filters.type || filters.contentTier) ? filteredCourses : courses}
+          courses={(filters.continent || filters.mood || filters.type || filters.contentTier || showStudiosOnly) ? filteredCourses : courses}
           onCourseClick={handleMapCourseClick}
           onClose={() => setShowMapView(false)}
         />

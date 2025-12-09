@@ -2,8 +2,19 @@
 
 export function getBlurb(course) {
   // Use custom descriptions if available, otherwise generate
-  if (course.blurb && Array.isArray(course.blurb) && course.blurb.length >= 2) {
-    return course.blurb
+  if (course.blurb && Array.isArray(course.blurb)) {
+    // For igolf courses, single paragraph is fine; for others, need at least 2
+    if (course.isIgolf && course.blurb.length >= 1) {
+      return course.blurb
+    }
+    if (!course.isIgolf && course.blurb.length >= 2) {
+      return course.blurb
+    }
+  }
+  
+  // For igolf courses with description field, convert to array
+  if (course.isIgolf && course.description && !course.blurb) {
+    return [course.description]
   }
   
   // Fallback to generated blurbs

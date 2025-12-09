@@ -27,6 +27,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
   
   const isStudio = course.isStudio || false
   const hasStandardVersion = course.hasStandardVersion || false
+  const isIgolf = course.isIgolf || false
   const userHasStudioAccess = hasStudioAccess()
   
   // Default to Studio version if course is Studio (for conversion opportunity)
@@ -57,7 +58,9 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
   }
 
   // Generate mock stats for the course based on selected version
-  const stats = generateMockStats(course, selectedVersion)
+  // For igolf courses, always use 'igolf' version (not studio/standard)
+  const statsVersion = isIgolf ? 'igolf' : selectedVersion
+  const stats = generateMockStats(course, statsVersion)
   
   const handleTeeOffClick = (e) => {
     e.stopPropagation()
@@ -215,6 +218,11 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
               <div className="modal-title-container">
                 <h1 className="modal-title">{course.name}</h1>
                 {isStudio && <StudioBadge variant="modal" size="medium" />}
+                {isIgolf && (
+                  <div className="igolf-badge" title="iGolf Course - Radar Mapped (+/-5m)">
+                    iGolf
+                  </div>
+                )}
               </div>
             </div>
             <div className="modal-meta">
@@ -238,7 +246,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                               className="modal-tee-off-btn modal-upgrade-btn"
                               onClick={handleTeeOffClick}
                             >
-                              Upgrade to Studio & Play
+                              Upgrade to Studios & Play
                             </button>
                             <button
                               className="modal-play-later-btn"
@@ -253,7 +261,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                               className="modal-tee-off-btn modal-upgrade-btn"
                               onClick={handleTeeOffClick}
                             >
-                              Tee Off Now (Studio)
+                              Tee Off Now (Studios)
                             </button>
                             <button
                               className="modal-secondary-btn"
@@ -276,7 +284,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                               className="modal-secondary-btn"
                               onClick={handleViewStudioFeatures}
                             >
-                              View Studio Features
+                              View Studios Features
                             </button>
                       </>
                     )}
@@ -369,7 +377,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                       <div className="comparison-header">
                         <div className="comparison-cell header">Feature</div>
                         <div className="comparison-cell header">Standard Version</div>
-                        <div className="comparison-cell header studio-header">Studio Version</div>
+                        <div className="comparison-cell header studio-header">Studios Version</div>
                       </div>
                       <div className="comparison-row">
                         <div className="comparison-cell label">Mapping</div>
@@ -427,6 +435,14 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                       <p><strong>Mapping:</strong> {course.standardFeatures?.mappingType || 'Satellite'} ({course.standardFeatures?.accuracy || '1m Accuracy'})</p>
                       <p><strong>Resolution:</strong> {course.standardFeatures?.resolution || 'HD Textures (1080p)'}</p>
                       <p><strong>Physics:</strong> {course.standardFeatures?.physics || 'Standard Terrain Model'}</p>
+                    </div>
+                  )}
+                  {isIgolf && (
+                    <div className="tech-specs-detail">
+                      <p><strong>Mapping:</strong> {course.igolfFeatures?.mappingType || 'Radar'} ({course.igolfFeatures?.accuracy || '+/-5m'})</p>
+                      <p><strong>Resolution:</strong> {course.igolfFeatures?.resolution || 'Standard'}</p>
+                      <p><strong>Physics:</strong> {course.igolfFeatures?.physics || 'Basic Terrain Model'}</p>
+                      <p><strong>File Size:</strong> {course.igolfFeatures?.fileSize || '200 MB'}</p>
                     </div>
                   )}
                 </div>

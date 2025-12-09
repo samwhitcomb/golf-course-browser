@@ -12,12 +12,18 @@ export function generateMockStats(course, version = null) {
   const isStudio = course.isStudio || false
   
   // Determine version
+  const isIgolf = course.isIgolf || false
   if (!version) {
-    version = isStudio ? 'studio' : 'standard'
+    if (isIgolf) {
+      version = 'igolf'
+    } else {
+      version = isStudio ? 'studio' : 'standard'
+    }
   }
   
   // Studio version is more challenging due to accuracy
-  const versionMultiplier = version === 'studio' ? 1.05 : 0.95
+  // iGolf version is less accurate, so slightly easier than standard
+  const versionMultiplier = version === 'studio' ? 1.05 : version === 'igolf' ? 0.90 : 0.95
   
   // Average Score: Higher rating = higher average score
   // Base score around par, adjusted by difficulty
@@ -25,6 +31,8 @@ export function generateMockStats(course, version = null) {
   let baseScore = par + (rating - 4.0) * 8
   if (version === 'studio') {
     baseScore += 0.7 // Studio is more challenging
+  } else if (version === 'igolf') {
+    baseScore -= 1.0 // iGolf is easier (less accurate mapping)
   } else {
     baseScore -= 0.7 // Standard is easier
   }
@@ -67,6 +75,8 @@ export function generateMockStats(course, version = null) {
   // Adjust for version: Studio is more challenging (lower GIR)
   if (version === 'studio') {
     girBase = Math.max(20, girBase - 3) // Studio is 3% harder
+  } else if (version === 'igolf') {
+    girBase = Math.min(80, girBase + 5) // iGolf is 5% easier (less accurate mapping)
   } else {
     girBase = Math.min(80, girBase + 3) // Standard is 3% easier
   }
@@ -137,10 +147,15 @@ export function generateMockStats(course, version = null) {
     ? 15000 + Math.floor(Math.random() * 10000)
     : 10000 + Math.floor(Math.random() * 10000)
   
-  // Add mapping type based on version
-  const mappingType = version === 'studio' 
-    ? (course.studioFeatures?.mappingType || 'Lidar')
-    : (course.standardFeatures?.mappingType || 'Satellite')
+  // Add mapping type based on version or course type
+  let mappingType
+  if (course.isIgolf) {
+    mappingType = course.igolfFeatures?.mappingType || 'Radar'
+  } else if (version === 'studio') {
+    mappingType = course.studioFeatures?.mappingType || 'Lidar'
+  } else {
+    mappingType = course.standardFeatures?.mappingType || 'Satellite'
+  }
   
   return {
     averageScore,

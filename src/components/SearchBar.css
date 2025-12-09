@@ -34,3 +34,33 @@
   pointer-events: none;
 }
 
+.search-clear-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.search-clear-button:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-clear-button:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+

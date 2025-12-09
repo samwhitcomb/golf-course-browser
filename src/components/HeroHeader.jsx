@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAssetPath } from '../utils/baseUrl'
+import StudioBadge from './StudioBadge'
 import './HeroHeader.css'
 
 function HeroHeader({ featuredCourse, onTeeOffClick }) {
@@ -29,9 +30,12 @@ function HeroHeader({ featuredCourse, onTeeOffClick }) {
       <div className="hero-content">
         <div className="hero-text">
           <h2 className="hero-title">Featured Course</h2>
-          <h1 className="hero-course-name">
-            {featuredCourse ? featuredCourse.name : 'Chisholm Park Golf Club'}
-          </h1>
+          <div className="hero-course-header">
+            <h1 className="hero-course-name">
+              {featuredCourse ? featuredCourse.name : 'Chisholm Park Golf Club'}
+            </h1>
+            <StudioBadge variant="hero" />
+          </div>
           <p className="hero-description">
             {featuredCourse ? featuredCourse.description : 'A stunning 18-hole championship links course located on the scenic Otago Peninsula in Dunedin, New Zealand'}
           </p>

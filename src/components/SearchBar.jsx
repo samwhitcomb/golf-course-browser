@@ -7,6 +7,12 @@ function SearchBar({ onSearch, placeholder = "Search courses...", value = "" }) 
     onSearch(value)
   }
 
+  const handleClear = () => {
+    onSearch('')
+  }
+
+  const hasValue = value && value.length > 0
+
   return (
     <div className="search-bar-container">
       <input
@@ -16,7 +22,18 @@ function SearchBar({ onSearch, placeholder = "Search courses...", value = "" }) 
         value={value}
         onChange={handleChange}
       />
-      <span className="search-icon">🔍</span>
+      {hasValue ? (
+        <button
+          className="search-clear-button"
+          onClick={handleClear}
+          aria-label="Clear search"
+          type="button"
+        >
+          ✕
+        </button>
+      ) : (
+        <span className="search-icon">🔍</span>
+      )}
     </div>
   )
 }

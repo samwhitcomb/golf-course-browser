@@ -22,8 +22,8 @@ function VersionSelector({ selectedVersion, onVersionChange, isStudio, hasStanda
           className={`version-option version-option-studio ${selectedVersion === 'studio' ? 'active' : ''}`}
           onClick={() => onVersionChange('studio')}
         >
-          <span className="version-name">Studio</span>
-          <span className="version-badge version-badge-studio">💎 PREMIUM</span>
+          <span className="version-name">Studios</span>
+          <span className="version-badge version-badge-studio">PREMIUM</span>
         </button>
       </div>
     </div>

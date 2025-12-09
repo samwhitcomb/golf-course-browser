@@ -31,8 +31,7 @@ function UpgradeModal({ onClose, onUpgrade, onPlayStandard, course }) {
         <button className="upgrade-modal-close" onClick={onClose}>×</button>
         
         <div className="upgrade-modal-header">
-          <div className="upgrade-modal-icon">💎</div>
-          <h2 className="upgrade-modal-title">Unlock Studio Access</h2>
+          <h2 className="upgrade-modal-title">Unlock Studios Access</h2>
           <p className="upgrade-modal-subtitle">
             Experience {course?.name || 'this course'} in stunning detail
           </p>
@@ -40,7 +39,7 @@ function UpgradeModal({ onClose, onUpgrade, onPlayStandard, course }) {
 
         <div className="upgrade-modal-content">
           <div className="upgrade-benefits">
-            <h3>Studio Benefits</h3>
+            <h3>Studios Benefits</h3>
             <ul className="benefits-list">
               <li>
                 <span className="benefit-icon">✓</span>
@@ -76,7 +75,7 @@ function UpgradeModal({ onClose, onUpgrade, onPlayStandard, course }) {
           <div className="upgrade-pricing">
             <div className="pricing-option">
               <div className="pricing-header">
-                <h4>Studio Membership</h4>
+                <h4>Studios Membership</h4>
                 <div className="pricing-amount">
                   <span className="pricing-currency">$</span>
                   <span className="pricing-value">9.99</span>
@@ -84,7 +83,7 @@ function UpgradeModal({ onClose, onUpgrade, onPlayStandard, course }) {
                 </div>
               </div>
               <ul className="pricing-features">
-                <li>Access to all Studio courses</li>
+                <li>Access to all Studios courses</li>
                 <li>Lidar-scanned precision</li>
                 <li>4K native textures</li>
                 <li>Advanced physics engine</li>

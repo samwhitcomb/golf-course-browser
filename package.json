@@ -4,6 +4,7 @@
   "description": "Golf course image scraper with UI",
   "scripts": {
     "dev": "vite",
+    "dev:local": "vite --config vite.config.local.js",
     "build": "vite build",
     "preview": "vite preview"
   },
