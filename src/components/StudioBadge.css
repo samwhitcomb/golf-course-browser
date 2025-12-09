@@ -32,7 +32,7 @@
 }
 
 .studio-badge-text {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   line-height: 1;
@@ -40,30 +40,30 @@
 
 /* Size variants */
 .studio-badge-small {
-  padding: 3px 6px;
-  font-size: 9px;
-}
-
-.studio-badge-small .studio-badge-text {
-  font-size: 8px;
-}
-
-.studio-badge-medium {
   padding: 4px 8px;
   font-size: 10px;
 }
 
+.studio-badge-small .studio-badge-text {
+  font-size: 9px;
+}
+
+.studio-badge-medium {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
 .studio-badge-medium .studio-badge-text {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .studio-badge-large {
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 7px 14px;
+  font-size: 13px;
 }
 
 .studio-badge-large .studio-badge-text {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 /* Variant styles */

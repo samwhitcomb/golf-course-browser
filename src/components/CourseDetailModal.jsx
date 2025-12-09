@@ -3,11 +3,14 @@ import StatsBar from './StatsBar'
 import ScorecardPreview from './ScorecardPreview'
 import CourseMap from './CourseMap'
 import StudioBadge from './StudioBadge'
+import LegacyBadge from './LegacyBadge'
 import VersionSelector from './VersionSelector'
 import UpgradeModal from './UpgradeModal'
+import LegacyWarningModal from './LegacyWarningModal'
 import StarRating from './StarRating'
 import { generateMockStats } from '../utils/mockStats'
 import { hasStudioAccess } from '../utils/subscription'
+import { shouldShowLegacyWarning } from '../utils/userPreferences'
 import { getAssetPath } from '../utils/baseUrl'
 import './CourseDetailModal.css'
 
@@ -23,6 +26,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [activeTab, setActiveTab] = useState('overview')
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+  const [showLegacyWarning, setShowLegacyWarning] = useState(false)
   const [selectedVersion, setSelectedVersion] = useState(course.isStudio ? 'studio' : 'standard')
   
   const isStudio = course.isStudio || false
@@ -58,18 +62,36 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
   }
 
   // Generate mock stats for the course based on selected version
-  // For igolf courses, always use 'igolf' version (not studio/standard)
+  // For LEGACY courses, always use 'igolf' version (not studio/standard)
   const statsVersion = isIgolf ? 'igolf' : selectedVersion
   const stats = generateMockStats(course, statsVersion)
   
   const handleTeeOffClick = (e) => {
     e.stopPropagation()
+    // Check if it's a legacy course and warning hasn't been dismissed
+    if (isIgolf && shouldShowLegacyWarning()) {
+      setShowLegacyWarning(true)
+      return
+    }
     // If Studio version selected and user doesn't have access, show upgrade modal
     if (selectedVersion === 'studio' && !userHasStudioAccess) {
       setShowUpgradeModal(true)
     } else if (onTeeOffClick) {
       onTeeOffClick()
     }
+  }
+
+  const handleLegacyProceed = () => {
+    setShowLegacyWarning(false)
+    // Proceed with the original tee off action
+    if (onTeeOffClick) {
+      onTeeOffClick()
+    }
+  }
+
+  const handleLegacyCancel = () => {
+    setShowLegacyWarning(false)
+    // Just close the warning, keep the modal open
   }
   
   const handlePlayStandardClick = () => {
@@ -219,9 +241,7 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
                 <h1 className="modal-title">{course.name}</h1>
                 {isStudio && <StudioBadge variant="modal" size="medium" />}
                 {isIgolf && (
-                  <div className="igolf-badge" title="iGolf Course - Radar Mapped (+/-5m)">
-                    iGolf
-                  </div>
+                  <LegacyBadge variant="modal" size="medium" />
                 )}
               </div>
             </div>
@@ -499,6 +519,15 @@ function CourseDetailModal({ course, onClose, getBlurb, userRating = 0, onRating
             }}
             onPlayStandard={handlePlayStandardFromModal}
             course={course}
+          />
+        )}
+
+        {showLegacyWarning && (
+          <LegacyWarningModal
+            course={course}
+            onClose={() => setShowLegacyWarning(false)}
+            onProceed={handleLegacyProceed}
+            onCancel={handleLegacyCancel}
           />
         )}
       </div>

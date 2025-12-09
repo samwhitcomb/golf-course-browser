@@ -118,6 +118,57 @@ export function getCountryFlag(location) {
     return '🇹🇭'
   }
   
+  // Singapore
+  if (locationLower.includes('singapore')) {
+    return '🇸🇬'
+  }
+  
+  // Malaysia
+  if (locationLower.includes('malaysia') || locationLower.includes('kuala lumpur') || 
+      locationLower.includes('malacca')) {
+    return '🇲🇾'
+  }
+  
+  // Indonesia
+  if (locationLower.includes('indonesia') || locationLower.includes('jakarta') || 
+      locationLower.includes('surabaya')) {
+    return '🇮🇩'
+  }
+  
+  // Philippines
+  if (locationLower.includes('philippines') || locationLower.includes('manila') || 
+      locationLower.includes('tagaytay')) {
+    return '🇵🇭'
+  }
+  
+  // Vietnam
+  if (locationLower.includes('vietnam') || locationLower.includes('ho chi minh') || 
+      locationLower.includes('hanoi') || locationLower.includes('da lat')) {
+    return '🇻🇳'
+  }
+  
+  // UAE / Dubai
+  if (locationLower.includes('uae') || locationLower.includes('dubai') || 
+      locationLower.includes('united arab emirates') || locationLower.includes('ajman')) {
+    return '🇦🇪'
+  }
+  
+  // Qatar
+  if (locationLower.includes('qatar') || locationLower.includes('doha')) {
+    return '🇶🇦'
+  }
+  
+  // Bahrain
+  if (locationLower.includes('bahrain') || locationLower.includes('manama')) {
+    return '🇧🇭'
+  }
+  
+  // Saudi Arabia
+  if (locationLower.includes('saudi') || locationLower.includes('riyadh') || 
+      locationLower.includes('jeddah')) {
+    return '🇸🇦'
+  }
+  
   // Spain
   if (locationLower.includes('spain') || locationLower.includes('sotogrande') || 
       locationLower.includes('casares')) {

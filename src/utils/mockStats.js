@@ -22,7 +22,7 @@ export function generateMockStats(course, version = null) {
   }
   
   // Studio version is more challenging due to accuracy
-  // iGolf version is less accurate, so slightly easier than standard
+  // LEGACY version is less accurate, so slightly easier than standard
   const versionMultiplier = version === 'studio' ? 1.05 : version === 'igolf' ? 0.90 : 0.95
   
   // Average Score: Higher rating = higher average score
@@ -32,7 +32,7 @@ export function generateMockStats(course, version = null) {
   if (version === 'studio') {
     baseScore += 0.7 // Studio is more challenging
   } else if (version === 'igolf') {
-    baseScore -= 1.0 // iGolf is easier (less accurate mapping)
+    baseScore -= 1.0 // LEGACY is easier (less accurate mapping)
   } else {
     baseScore -= 0.7 // Standard is easier
   }

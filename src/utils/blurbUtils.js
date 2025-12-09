@@ -3,7 +3,7 @@
 export function getBlurb(course) {
   // Use custom descriptions if available, otherwise generate
   if (course.blurb && Array.isArray(course.blurb)) {
-    // For igolf courses, single paragraph is fine; for others, need at least 2
+    // For LEGACY courses, single paragraph is fine; for others, need at least 2
     if (course.isIgolf && course.blurb.length >= 1) {
       return course.blurb
     }
@@ -12,7 +12,7 @@ export function getBlurb(course) {
     }
   }
   
-  // For igolf courses with description field, convert to array
+  // For LEGACY courses with description field, convert to array
   if (course.isIgolf && course.description && !course.blurb) {
     return [course.description]
   }

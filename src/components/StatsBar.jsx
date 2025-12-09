@@ -116,7 +116,7 @@ function StatsBar({ course, stats }) {
           </div>
         </div>
 
-        {/* Mapping Type (for Studio, Standard, and iGolf courses) */}
+        {/* Mapping Type (for Studio, Standard, and LEGACY courses) */}
         {stats.mappingType && (
           <div className="stat-column">
             <div className="stat-label">Mapping Type</div>

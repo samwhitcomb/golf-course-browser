@@ -5,6 +5,7 @@ const PLAY_LATER_KEY = 'golf_courses_play_later'
 const LAST_PLAYED_KEY = 'golf_courses_last_played'
 const RATINGS_KEY = 'golf_courses_ratings'
 const RATINGS_MIGRATED_KEY = 'golf_courses_ratings_migrated'
+const LEGACY_WARNING_DISMISSED_KEY = 'golf_courses_legacy_warning_dismissed'
 
 /**
  * Get all favorited course IDs
@@ -249,6 +250,31 @@ export function migrateFavoritesToRatings() {
     localStorage.setItem(RATINGS_MIGRATED_KEY, 'true')
   } catch (err) {
     console.error('Error migrating favorites to ratings:', err)
+  }
+}
+
+/**
+ * Check if the legacy warning should be shown
+ * @returns {boolean} True if warning should be shown, false if dismissed
+ */
+export function shouldShowLegacyWarning() {
+  try {
+    const dismissed = localStorage.getItem(LEGACY_WARNING_DISMISSED_KEY)
+    return dismissed !== 'true'
+  } catch (err) {
+    console.error('Error reading legacy warning preference from localStorage:', err)
+    return true // Default to showing warning if there's an error
+  }
+}
+
+/**
+ * Dismiss the legacy warning permanently
+ */
+export function dismissLegacyWarning() {
+  try {
+    localStorage.setItem(LEGACY_WARNING_DISMISSED_KEY, 'true')
+  } catch (err) {
+    console.error('Error dismissing legacy warning in localStorage:', err)
   }
 }
 

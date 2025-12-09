@@ -1,0 +1,173 @@
+.legacy-warning-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.legacy-warning-modal {
+  background: #1a1a1a;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.legacy-warning-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.legacy-warning-modal-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.legacy-warning-modal-header {
+  text-align: center;
+  padding: 40px 40px 30px;
+  border-bottom: 1px solid #333;
+}
+
+.legacy-warning-modal-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.legacy-warning-modal-content {
+  padding: 30px 40px;
+}
+
+.legacy-warning-modal-body {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.legacy-warning-modal-body strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.legacy-warning-modal-checkbox {
+  padding: 0 40px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.legacy-warning-modal-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  user-select: none;
+}
+
+.legacy-warning-modal-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #f59e0b;
+}
+
+.legacy-warning-modal-actions {
+  padding: 20px 40px 30px;
+  border-top: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legacy-warning-btn {
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.legacy-warning-btn-primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+}
+
+.legacy-warning-btn-primary:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.legacy-warning-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.legacy-warning-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .legacy-warning-modal {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .legacy-warning-modal-header {
+    padding: 30px 20px 20px;
+  }
+
+  .legacy-warning-modal-content {
+    padding: 20px;
+  }
+
+  .legacy-warning-modal-checkbox {
+    padding: 0 20px 20px;
+  }
+
+  .legacy-warning-modal-actions {
+    padding: 20px;
+  }
+}
+

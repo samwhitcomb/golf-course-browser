@@ -29,6 +29,18 @@
   z-index: 5;
 }
 
+.course-card-legacy-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+}
+
+/* If both badges somehow appear, stack them */
+.course-card-image-container:has(.course-card-studio-badge):has(.course-card-legacy-badge) .course-card-legacy-badge {
+  top: 40px; /* Position below studio badge if both exist */
+}
+
 .course-card-standard-indicator {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.5);

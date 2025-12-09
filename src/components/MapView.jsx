@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -34,11 +34,18 @@ function FitBounds({ courses }) {
 
 function MapView({ courses, onCourseClick, onClose }) {
   const mapRef = useRef(null)
+  const [showLegacy, setShowLegacy] = useState(false)
 
   // Filter courses with valid coordinates
-  const coursesWithCoords = courses.filter(
-    c => c.latitude && c.longitude && c.hasImage
-  )
+  // By default, exclude legacy (igolf) courses unless toggle is on
+  const coursesWithCoords = courses.filter(c => {
+    if (!c.latitude || !c.longitude) return false
+    // Regular courses need hasImage
+    if (!c.isIgolf && !c.hasImage) return false
+    // Legacy courses only show if toggle is on
+    if (c.isIgolf && !showLegacy) return false
+    return true
+  })
 
   // Calculate center point (average of all course coordinates)
   const getCenter = () => {
@@ -69,9 +76,24 @@ function MapView({ courses, onCourseClick, onClose }) {
     <div className="map-view-overlay" onClick={onClose}>
       <div className="map-view-container" onClick={e => e.stopPropagation()}>
         <button className="map-view-close" onClick={onClose}>×</button>
+        <div className="map-view-toggle-container-overlay">
+          <span className="map-view-toggle-label">Show Legacy</span>
+          <button
+            role="switch"
+            aria-checked={showLegacy}
+            className={`map-view-toggle ${showLegacy ? 'active' : ''}`}
+            onClick={() => setShowLegacy(!showLegacy)}
+            aria-label={showLegacy ? 'Hide legacy courses' : 'Show legacy courses'}
+            title={showLegacy ? 'Hide legacy courses' : 'Show legacy courses'}
+          >
+            <span className="map-view-toggle-slider"></span>
+          </button>
+        </div>
         <div className="map-view-header">
-          <h2>Course Locations</h2>
-          <p>{coursesWithCoords.length} courses on map</p>
+          <div>
+            <h2>Course Locations</h2>
+            <p>{coursesWithCoords.length} courses on map</p>
+          </div>
         </div>
         {coursesWithCoords.length > 0 ? (
           <MapContainer

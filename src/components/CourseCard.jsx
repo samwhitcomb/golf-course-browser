@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import StudioBadge from './StudioBadge'
+import LegacyBadge from './LegacyBadge'
 import './CourseCard.css'
 
 function CourseCard({ course, onClick }) {
@@ -44,6 +45,57 @@ function CourseCard({ course, onClick }) {
     if (locationLower.includes('thailand') || locationLower.includes('pattaya') || 
         locationLower.includes('pathum thani')) {
       return '🇹🇭'
+    }
+    
+    // Singapore
+    if (locationLower.includes('singapore')) {
+      return '🇸🇬'
+    }
+    
+    // Malaysia
+    if (locationLower.includes('malaysia') || locationLower.includes('kuala lumpur') || 
+        locationLower.includes('malacca')) {
+      return '🇲🇾'
+    }
+    
+    // Indonesia
+    if (locationLower.includes('indonesia') || locationLower.includes('jakarta') || 
+        locationLower.includes('surabaya')) {
+      return '🇮🇩'
+    }
+    
+    // Philippines
+    if (locationLower.includes('philippines') || locationLower.includes('manila') || 
+        locationLower.includes('tagaytay')) {
+      return '🇵🇭'
+    }
+    
+    // Vietnam
+    if (locationLower.includes('vietnam') || locationLower.includes('ho chi minh') || 
+        locationLower.includes('hanoi') || locationLower.includes('da lat')) {
+      return '🇻🇳'
+    }
+    
+    // UAE / Dubai
+    if (locationLower.includes('uae') || locationLower.includes('dubai') || 
+        locationLower.includes('united arab emirates') || locationLower.includes('ajman')) {
+      return '🇦🇪'
+    }
+    
+    // Qatar
+    if (locationLower.includes('qatar') || locationLower.includes('doha')) {
+      return '🇶🇦'
+    }
+    
+    // Bahrain
+    if (locationLower.includes('bahrain') || locationLower.includes('manama')) {
+      return '🇧🇭'
+    }
+    
+    // Saudi Arabia
+    if (locationLower.includes('saudi') || locationLower.includes('riyadh') || 
+        locationLower.includes('jeddah')) {
+      return '🇸🇦'
     }
     
     // Spain
@@ -110,6 +162,11 @@ function CourseCard({ course, onClick }) {
         {course.isStudio && (
           <div className="course-card-studio-badge">
             <StudioBadge variant="card" size="small" />
+          </div>
+        )}
+        {course.isIgolf && (
+          <div className="course-card-legacy-badge">
+            <LegacyBadge variant="card" size="small" />
           </div>
         )}
         {(course.hasImage || course.imageUrl || course.isIgolf) ? (

@@ -111,7 +111,7 @@ function BrowseApp() {
           const locationMatch = course.location?.toLowerCase().includes(query) || false
           // Check description (for regular courses)
           const descriptionMatch = course.description?.toLowerCase().includes(query) || false
-          // Check blurb (for igolf courses and regular courses with blurbs)
+          // Check blurb (for LEGACY courses and regular courses with blurbs)
           const blurbMatch = course.blurb && Array.isArray(course.blurb) 
             ? course.blurb.some(paragraph => paragraph?.toLowerCase().includes(query))
             : false
@@ -478,7 +478,12 @@ function BrowseApp() {
         <div className="search-results-overlay">
           <div className="search-results-container">
             <div className="search-results-header">
-              <h2>Search Results for "{searchQuery}"</h2>
+              <div>
+                <h2>Search Results for "{searchQuery}"</h2>
+                <p className="search-results-count">
+                  {filteredCourses.length} {filteredCourses.length === 1 ? 'course' : 'courses'} found
+                </p>
+              </div>
               <button 
                 className="clear-search-btn"
                 onClick={() => setSearchQuery('')}

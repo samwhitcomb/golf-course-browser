@@ -36,7 +36,7 @@
   color: #ffffff;
   font-size: 24px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1002;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +48,28 @@
   transform: scale(1.1);
 }
 
+.map-view-toggle-container-overlay {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
 .map-view-header {
   padding: 20px 40px;
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;
   z-index: 1000;
 }
+
 
 .map-view-header h2 {
   margin: 0 0 8px 0;
@@ -66,6 +82,53 @@
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
+}
+
+.map-view-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-view-toggle-label {
+  font-size: 14px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.map-view-toggle {
+  position: relative;
+  display: inline-block;
+  width: 51px;
+  height: 31px;
+  background-color: rgba(118, 118, 128, 0.24);
+  border-radius: 15.5px;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.map-view-toggle.active {
+  background-color: #34c759;
+}
+
+.map-view-toggle-slider {
+  position: absolute;
+  content: "";
+  height: 27px;
+  width: 27px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.map-view-toggle.active .map-view-toggle-slider {
+  transform: translateX(20px);
 }
 
 .map-view-empty {
@@ -206,6 +269,24 @@
   }
 
   .map-view-header h2 {
+    font-size: 20px;
+  }
+
+  .map-view-toggle-container-overlay {
+    top: 15px;
+    right: 60px;
+    padding: 6px 10px;
+  }
+
+  .map-view-toggle-label {
+    font-size: 12px;
+  }
+
+  .map-view-close {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
     font-size: 20px;
   }
 }
